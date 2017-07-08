@@ -1,14 +1,19 @@
 import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ClienteDetailsPage } from '../cliente-details/cliente-details';
 
-import { NavController, NavParams } from 'ionic-angular';
-
-import { ItemDetailsPage } from '../item-details/item-details';
-
+/**
+ * Generated class for the ClientesPage page.
+ *
+ * See http://ionicframework.com/docs/components/#navigation for more info
+ * on Ionic pages and navigation.
+ */
+@IonicPage()
 @Component({
-  selector: 'page-list',
-  templateUrl: 'list.html'
+  selector: 'page-clientes',
+  templateUrl: 'clientes.html',
 })
-export class ListPage {
+export class ClientesPage {
   icons: string[];
   items: Array<{title: string, note: string, icon: string}>;
 
@@ -20,15 +25,17 @@ export class ListPage {
     for(let i = 1; i < 11; i++) {
       this.items.push({
         title: 'Cliente ' + i,
-        note: 'Orden #' + i,
+        note: '#' + i,
         icon: this.icons[Math.floor(Math.random() * this.icons.length)]
       });
     }
+
   }
 
-  itemTapped(event, item) {
-    this.navCtrl.push(ItemDetailsPage, {
+  clienteTapped(event, item) {
+    this.navCtrl.push(ClienteDetailsPage, {
       item: item
     });
   }
+
 }

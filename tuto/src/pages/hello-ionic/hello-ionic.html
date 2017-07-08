@@ -3,23 +3,35 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Hello Ionic</ion-title>
+    <ion-title>Login</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
 
-  <h3>Welcome to your first Ionic app!</h3>
+  <h3>Bienvenido a KumiSystem!</h3>
+
+  <ion-list>
+    <ion-item>
+      <ion-label stacked>Usuario</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Password</ion-label>
+      <ion-input type="password"></ion-input>
+    </ion-item>
+
+  </ion-list>
 
   <p>
-    This starter project is our way of helping you get a functional app running in record time.
+    <button ion-button color="primary">Login</button>
   </p>
-  <p>
-    Follow along on the tutorial section of the Ionic docs!
-  </p>
+
+<!--
   <p>
     <button ion-button color="primary" menuToggle>Toggle Menu</button>
   </p>
-
+-->
 </ion-content>
