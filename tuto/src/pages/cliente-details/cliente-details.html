@@ -3,11 +3,34 @@
     <button menuToggle *ngIf="!selectedItem">
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Detalle de Cliente</ion-title>
+    <ion-title *ngIf="selectedItem">{{selectedItem.name}}</ion-title>
+    <ion-title *ngIf="!selectedItem">Nuevo Cliente</ion-title>
   </ion-navbar>
+
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="pestana">
+      <ion-segment-button value="basico">
+        Básico
+      </ion-segment-button>
+      <ion-segment-button value="contacto">
+        Contacto
+      </ion-segment-button>
+      <ion-segment-button value="despacho">
+        Despacho
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-fab top right edge>
+    <button ion-fab mini (click)=toggleReadonly()>
+      <ion-icon name="create"></ion-icon>
+    </button>
+  </ion-fab>
+
+
+
   <h3 text-center *ngIf="selectedItem">
     <p>
       <ion-icon [name]="selectedItem.icon"></ion-icon>
@@ -17,4 +40,63 @@
   <h4 text-center *ngIf="selectedItem">
     Aquí el detalle de un cliente<br>
   </h4>
+
+  <ion-list *ngIf="pestana=='basico'">
+    <ion-item>
+      <ion-label stacked>Razon Social</ion-label>
+      <ion-input type="text" [readonly]="isReadonly()"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>R.I.F.</ion-label>
+      <ion-input type="text" [readonly]="isReadonly()"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Sucursal</ion-label>
+      <ion-input type="text" [readonly]="isReadonly()"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Dirección Fiscal</ion-label>
+      <ion-textarea type="text" [readonly]="isReadonly()"></ion-textarea>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="pestana=='contacto'">
+    <ion-item>
+      <ion-label stacked>Teléfono Principal</ion-label>
+      <ion-input type="tel" [readonly]="isReadonly()"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Teléfono Local</ion-label>
+      <ion-input type="tel" [readonly]="isReadonly()"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Email Principal</ion-label>
+      <ion-input type="email" [readonly]="isReadonly()"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="pestana=='despacho'">
+    <ion-item>
+      <ion-label stacked>Dirección de Despacho</ion-label>
+      <ion-textarea type="text" [readonly]="isReadonly()"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Condición de pago</ion-label>
+      <ion-select [disabled]="isReadonly()">
+      <!--[(ngModel)]="gaming">-->
+        <ion-option value="0">De contado</ion-option>
+        <ion-option value="5">5 dias crédito</ion-option>
+        <ion-option value="10">10 dias crédito</ion-option>
+        <ion-option value="15">15 dias crédito</ion-option>
+        <ion-option value="30">30 dias crédito</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
 </ion-content>

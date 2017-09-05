@@ -15,27 +15,43 @@ import { ClienteDetailsPage } from '../cliente-details/cliente-details';
 })
 export class ClientesPage {
   icons: string[];
-  items: Array<{title: string, note: string, icon: string}>;
+  clientes: Array<{name: string, id: string, icon: string}>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.icons = ['flask', 'wifi', 'beer', 'football', 'basketball', 'paper-plane',
-    'american-football', 'boat', 'bluetooth', 'build'];
+    this.icons = ['checkmark-circle', 'close'];
 
-    this.items = [];
+    this.clientes = [];
     for(let i = 1; i < 11; i++) {
-      this.items.push({
-        title: 'Cliente ' + i,
-        note: '#' + i,
+      this.clientes.push({
+        name: 'Nombre del cliente ' + i,
+        id: 'A' + Math.floor(Math.random() * 10000),
         icon: this.icons[Math.floor(Math.random() * this.icons.length)]
       });
     }
-
   }
 
-  clienteTapped(event, item) {
+  clienteView(event, item) {
     this.navCtrl.push(ClienteDetailsPage, {
       item: item
     });
   }
+
+  doInfinite(infiniteScroll) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      for(let i = 1; i < 11; i++) {
+        this.clientes.push({
+          name: 'Nombre del cliente ' + i,
+          id: 'A' + Math.floor(Math.random() * 10000),
+          icon: this.icons[Math.floor(Math.random() * this.icons.length)]
+        });
+      }
+
+      console.log('Async operation has ended');
+      infiniteScroll.complete();
+    }, 500);
+  }
+
 
 }
